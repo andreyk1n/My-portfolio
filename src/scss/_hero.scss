@@ -1,0 +1,15 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.hero {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include adaptiveValue('padding-top', 120px, 80px);
+    background-color: #13191C;
+
+    &__img {
+        border-radius: 50%;
+    }
+}
