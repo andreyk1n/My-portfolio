@@ -1,12 +1,13 @@
 // ШРИФТИ
-$fontFamily: 'Roboto', sans-serif;
+// $fontFamily: 'Roboto', sans-serif;
+$fontFamily:'Audiowide';
 $fontSize: 18px;
 
 // Кольори
-$bgColor: white;
+$bgColor: #fff;
 $transitionDuration: .8s;
-$fontColor: rgb(67, 67, 70);
-$linkColor: #000;
+$fontColor: #c7c7c7;
+$linkColor: #13191C;
 $linkHoverColor: rgba(79, 13, 106, 0.578);
 $activeColor: rgb(51, 0, 128);
 $boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -26,11 +27,11 @@ $h2FontWeight: 800;
 $h3FontWeight: 700;
 
 // Стилі кнопки .button
-$buttonBgColor: rgb(80, 80, 117);
-$buttonFontColor: white;
+$buttonBgColor: #fff;
+$buttonFontColor: #13191C;
 $buttonPaddings: 5px 20px;
 $buttonBorderRadius: 10px;
-$buttonHover: lightBlue;
+$buttonHover: #fff;
 $buttonActive: rgb(16, 77, 97);
 
 // Обмеження контейнера

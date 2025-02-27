@@ -112,6 +112,7 @@ a {
     color: $linkColor;
     text-decoration: none;
     transition-duration: $transitionDuration;
+    font-family: 'Audiowide';
 }
 
 a:active {
@@ -174,4 +175,22 @@ input {
 
 :-webkit-autofill::first-line {
     font-size: 16px;
+}
+
+p {
+    line-height: 140%;
+}
+
+
+.button {
+    padding: 15px;
+    width: 100%;
+    max-width: 300px;
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+
+    &:hover {
+        opacity: .5;
+        transform: translateY(-5px);
+    }
 }
