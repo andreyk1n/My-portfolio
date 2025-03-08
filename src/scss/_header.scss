@@ -8,14 +8,13 @@
     left: 0;
     transition: top $transitionDuration;
     padding: 10px 0;
-    background-color: #fff;
+    background-color: #0c0f11;
 
 
     &__container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px solid black;
     }
 
     &__nav {
@@ -36,7 +35,7 @@
             justify-content: center;
             width: 100%;
             min-height: 100vh; 
-            background-color: #ffffff;
+            background-color: #0c0f11;
             transition-duration: $transitionDuration;
         }
     
@@ -54,7 +53,6 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: #000;
             transition-duration: $transitionDuration;
 
         }

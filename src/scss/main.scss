@@ -3,6 +3,7 @@
 @use 'header';
 @use 'footer';
 @use 'hero';
+@use 'about';
 
 
 // ==============================================================================================
@@ -67,7 +68,13 @@
     font-style: normal;
     font-display: swap;
 }
-
+@font-face {
+    font-family: 'myfont';
+    src: url('../fonts/myfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 
 
 
@@ -86,6 +93,7 @@ body {
     background-color: $bgColor;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    line-height: 150%;
 }
 
 .wrapper {
@@ -114,7 +122,9 @@ a {
     transition-duration: $transitionDuration;
     // font-family: 'Audiowide';
 }
-
+a:hover {
+    color: $linkHoverColor;
+}
 a:active {
     color: $activeColor;
 }
@@ -152,7 +162,11 @@ ol, ul {
 }
 
 h1 {
-    @include adaptiveValue('font-size', 60px, 24px);
+    @include adaptiveValue('font-size', 28px, 24px);
+    color: #a8adb2;
+    span {
+        color: #eef5fc;
+    }
 }
 
 // Cтилізація ектів статусу для поточної сторінки

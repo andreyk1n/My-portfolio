@@ -1,14 +1,15 @@
 // ШРИФТИ
-$fontFamily: 'Arial', sans-serif;
+// $fontFamily: 'Arial', sans-serif;
+$fontFamily: 'myfont', sans-serif;
 // $fontFamily:'Audiowide';
 $fontSize: 18px;
 
 // Кольори
-$bgColor: #fff;
+$bgColor: #0c0f11;
 $transitionDuration: .8s;
-$fontColor: #c7c7c7;
-$linkColor: #13191C;
-$linkHoverColor: rgba(79, 13, 106, 0.578);
+$fontColor: #adb4bb;
+$linkColor: #adb4bb;
+$linkHoverColor: #4385d7;
 $activeColor: rgb(51, 0, 128);
 $boxShadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -18,7 +19,7 @@ $paddingMedium: 15px;
 $paddingLarge: 30px;
 
 // Розмір і вага заголовків
-$h1FontSize: 40px;
+$h1FontSize: 28px;
 $h2FontSize: 28px;
 $h3FontSize: 20px;
 $mainFontWeight: 400;
@@ -27,7 +28,7 @@ $h2FontWeight: 800;
 $h3FontWeight: 700;
 
 // Стилі кнопки .button
-$buttonBgColor: #000;
+$buttonBgColor: #adb4bb;
 $buttonFontColor: #13191C;
 $buttonPaddings: 5px 20px;
 $buttonBorderRadius: 10px;
