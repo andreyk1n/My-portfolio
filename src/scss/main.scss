@@ -162,10 +162,13 @@ ol, ul {
 }
 
 h1 {
-    @include adaptiveValue('font-size', 28px, 24px);
+    font-size: 26px;
+    font-weight: 400;
     color: #a8adb2;
     span {
         color: #eef5fc;
+    @include adaptiveValue('font-size', 28px, 26px);
+    font-weight: 700;
     }
 }
 
