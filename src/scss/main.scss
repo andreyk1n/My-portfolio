@@ -55,6 +55,7 @@
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'Audiowide';
     src: url('../fonts/Audiowide-Regular.woff2') format('woff2');
@@ -62,6 +63,7 @@
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'Roboto';
     src: url('../fonts/Roboto-Regular.woff2') format('woff2');
@@ -69,6 +71,7 @@
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'myfont';
     src: url('../fonts/myfont.woff2') format('woff2');
@@ -123,9 +126,11 @@ a {
     transition-duration: $transitionDuration;
     // font-family: 'Audiowide';
 }
+
 a:hover {
     color: $linkHoverColor;
 }
+
 a:active {
     color: $activeColor;
 }
@@ -155,8 +160,10 @@ a:active {
 }
 
 // Загальні стилі для списків
-ol, ul {
+ol,
+ul {
     padding-left: 20px;
+
     li:not(:last-child) {
         padding-bottom: 15px;
     }
@@ -166,10 +173,11 @@ h1 {
     font-size: 26px;
     font-weight: 400;
     color: #a8adb2;
+
     span {
         color: #eef5fc;
-    @include adaptiveValue('font-size', 28px, 26px);
-    font-weight: 700;
+        @include adaptiveValue('font-size', 28px, 26px);
+        font-weight: 700;
     }
 }
 

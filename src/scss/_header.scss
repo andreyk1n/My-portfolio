@@ -9,6 +9,7 @@
     transition: top $transitionDuration;
     padding: 10px 0;
     background-color: #0c0f11;
+    box-shadow: 0 2px 2px rgba(255, 255, 255, 0.1);
 
 
     &__container {
@@ -69,6 +70,7 @@
 
     &__logo {
         text-transform: uppercase;
+        z-index: 10;
     }
 
     &__burger {
