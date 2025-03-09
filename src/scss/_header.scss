@@ -56,6 +56,9 @@
             transition-duration: $transitionDuration;
 
         }
+        @media (max-width: 768px) {
+            font-size: 24px;
+        }
 
         &:hover {
             &::after {
