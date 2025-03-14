@@ -6,6 +6,7 @@
 @use 'about';
 @use 'posts';
 @use 'project';
+@use 'single';
 
 
 // ==============================================================================================
@@ -174,11 +175,27 @@ h1 {
     font-size: 26px;
     font-weight: 400;
     color: #a8adb2;
+    line-height: 130%;
 
     span {
         color: #eef5fc;
         @include adaptiveValue('font-size', 28px, 26px);
         font-weight: 700;
+    }
+}
+
+h2 {
+
+    position: relative;
+
+    &::after {
+        content: '';
+        width: 100px;
+        height: 2px;
+        background-color: $fontColor;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
     }
 }
 
@@ -222,6 +239,6 @@ p {
     }
 }
 
-
-
-  
+.list {
+    margin-top: 15px;
+}
