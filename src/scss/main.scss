@@ -108,6 +108,15 @@ body {
     width: 100%;
     justify-content: center;
     min-height: 100vh;
+
+    &--contacts {
+
+        .hero {
+            &.hero--bigger {
+                padding: 100px 0 30px 0;
+            }
+        }
+    }
 }
 
 .no-scroll {
