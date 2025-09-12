@@ -23,8 +23,8 @@
 // **Бургер-меню**
 // Додає клас .active для елементів .header__burger і .header__nav при кліку.
 // Інструкція: https://andreyk1n.github.io/starter-theme-docs/burger_menu.html
-import { initBurgerMenu } from './functions/initBurgerMenu.js';
-initBurgerMenu(); // Ініціалізація бургер-меню
+// import { initBurgerMenu } from './functions/initBurgerMenu.js';
+// initBurgerMenu(); // Ініціалізація бургер-меню
 // ==============================================================================================
 
 // ==============================================================================================
@@ -40,8 +40,8 @@ initBurgerMenu(); // Ініціалізація бургер-меню
 // **Скрол хедера**
 // Додає або змінює класи для хедера залежно від положення скролу.
 // Інструкція: https://andreyk1n.github.io/starter-theme-docs/sticky_header.html
-import { initScrollControlledHeader } from './functions/scrollHeader.js';
-initScrollControlledHeader(); // Ініціалізація функціоналу
+// import { initScrollControlledHeader } from './functions/scrollHeader.js';
+// initScrollControlledHeader(); // Ініціалізація функціоналу
 // ==============================================================================================
 
 // ==============================================================================================
