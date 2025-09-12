@@ -1,87 +1,50 @@
 @use 'variables' as *;
 @use 'mixins' as *;
-@use 'header';
-@use 'footer';
-@use 'hero';
-@use 'about';
-@use 'posts';
-@use 'project';
-@use 'single';
+@use 'partials/header';
+@use 'partials/footer';
 
 
 // ==============================================================================================
 // **Стилізація форми**
 // Цей модуль відповідає за стилі всіх форм, включаючи поля введення, кнопки та валідацію.
 // Підключення:
-// @use 'form';
+// @use 'partials/form';
 // ==============================================================================================
 
 // ==============================================================================================
 // **Стилі аккордіону**
 // Відповідає за вигляд і анімацію елементів аккордіону, включаючи заголовки та контент.
 // Підключення:
-// @use 'accordion';
+// @use 'components/accordion';
 // ==============================================================================================
 
 // ==============================================================================================
 // **Стилі табів**
 // Додає стилізацію для вкладок (tabs), включаючи активний стан і контент.
 // Підключення:
-// @use 'tabs';
+// @use 'components/tabs';
 // ==============================================================================================
 
 // ==============================================================================================
 // **Модальні вікна та поп-апи**
 // Налаштування стилів для модальних вікон, поп-апів і тригерів для їх відкриття/закриття.
 // Підключення:
-// @use 'modal';
+// @use 'partials/modal';
 // ==============================================================================================
 
 // ==============================================================================================
 // **Кастомний селект**
 // Базова стилізація кастомного селекту, включаючи розмір, кольори та поведінку.
 // Підключення:
-// @use 'customSelect';
+// @use 'components/customSelect';
 // ==============================================================================================
 
 // ==============================================================================================
 // **Анімації**
 // Модуль для додавання анімацій за класами, які можуть бути використані для будь-якого елемента.
 // Підключення:
-// @use 'animation';
+// @use 'partials/animation';
 // ==============================================================================================
-@font-face {
-    font-family: 'Press Start 2P';
-    src: url('../fonts/PressStart2P-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Audiowide';
-    src: url('../fonts/Audiowide-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'myfont';
-    src: url('../fonts/myfont.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 
 
 
@@ -99,7 +62,6 @@ body {
     background-color: $bgColor;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    line-height: 150%;
 }
 
 .wrapper {
@@ -107,16 +69,6 @@ body {
     flex-direction: column;
     width: 100%;
     justify-content: center;
-    min-height: 100vh;
-
-    &--contacts {
-
-        .hero {
-            &.hero--bigger {
-                padding: 100px 0 30px 0;
-            }
-        }
-    }
 }
 
 .no-scroll {
@@ -136,7 +88,6 @@ a {
     color: $linkColor;
     text-decoration: none;
     transition-duration: $transitionDuration;
-    // font-family: 'Audiowide';
 }
 
 a:hover {
@@ -182,31 +133,7 @@ ul {
 }
 
 h1 {
-    font-size: 26px;
-    font-weight: 400;
-    color: #a8adb2;
-    line-height: 130%;
-
-    span {
-        color: #eef5fc;
-        @include adaptiveValue('font-size', 28px, 26px);
-        font-weight: 700;
-    }
-}
-
-h2 {
-
-    position: relative;
-
-    &::after {
-        content: '';
-        width: 100px;
-        height: 2px;
-        background-color: $fontColor;
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-    }
+    @include adaptiveValue('font-size', 60px, 24px);
 }
 
 // Cтилізація ектів статусу для поточної сторінки
@@ -229,26 +156,4 @@ input {
 
 :-webkit-autofill::first-line {
     font-size: 16px;
-}
-
-p {
-    line-height: 140%;
-}
-
-
-.button {
-    padding: 15px;
-    width: 100%;
-    max-width: 300px;
-    font-family: 'Press Start 2P';
-    font-size: 14px;
-
-    &:hover {
-        opacity: .5;
-        transform: translateY(-5px);
-    }
-}
-
-.list {
-    margin-top: 15px;
 }
