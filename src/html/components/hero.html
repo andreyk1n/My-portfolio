@@ -1,15 +1,13 @@
 <section class="hero">
     <div class="hero__container">
-        <h1 class="hero__title">@@title</h1>
-        <p class="hero__desc">@@desc</p>
-        <a href="#" class="hero__button">@@buttonText</a>
+        <div class="hero__img-wrapper">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                data-src="@img/hero/hero-img.jpg" class="lazy hero__img" alt="Hero image">
+        </div>
+        <div class="hero__text">
+            <h1><span>Привіт, я Андрій — фронтенд-розробник.</span> Створюю швидкі, зручні та сучасні веб-інтерфейси.
+            </h1>
+            @@include('partials/socials.html')
+        </div>
     </div>
 </section>
-
-
-<!-- використання компонента -->
-<!-- @@include('components/hero.html', {
-"title": "Мій заголовок",
-"desc": "Опис секції",
-"buttonText": "Натисни сюди"
-}) -->
