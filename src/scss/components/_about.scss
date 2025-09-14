@@ -1,0 +1,11 @@
+.about {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        p, h3 {
+            margin-top: 10px;
+        }
+        
+    }
+}
