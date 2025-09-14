@@ -78,7 +78,6 @@
     font-display: swap;
 }
 
-
 // Для стартових налаштувнань теми
 * {
     margin: 0;
@@ -93,6 +92,7 @@ body {
     background-color: $bgColor;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    line-height: 150%;
 }
 
 .wrapper {
@@ -100,6 +100,16 @@ body {
     flex-direction: column;
     width: 100%;
     justify-content: center;
+    min-height: 100vh;
+
+    &--contacts {
+
+        .hero {
+            &.hero--bigger {
+                padding: 100px 0 30px 0;
+            }
+        }
+    }
 }
 
 .no-scroll {
@@ -119,6 +129,7 @@ a {
     color: $linkColor;
     text-decoration: none;
     transition-duration: $transitionDuration;
+    // font-family: 'Audiowide';
 }
 
 a:hover {
@@ -164,7 +175,31 @@ ul {
 }
 
 h1 {
-    @include adaptiveValue('font-size', 60px, 24px);
+    font-size: 26px;
+    font-weight: 400;
+    color: #a8adb2;
+    line-height: 130%;
+
+    span {
+        color: #eef5fc;
+        @include adaptiveValue('font-size', 28px, 26px);
+        font-weight: 700;
+    }
+}
+
+h2 {
+
+    position: relative;
+
+    &::after {
+        content: '';
+        width: 100px;
+        height: 2px;
+        background-color: $fontColor;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+    }
 }
 
 // Cтилізація ектів статусу для поточної сторінки
@@ -187,4 +222,26 @@ input {
 
 :-webkit-autofill::first-line {
     font-size: 16px;
+}
+
+p {
+    line-height: 140%;
+}
+
+
+.button {
+    padding: 15px;
+    width: 100%;
+    max-width: 300px;
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+
+    &:hover {
+        opacity: .5;
+        transform: translateY(-5px);
+    }
+}
+
+.list {
+    margin-top: 15px;
 }
