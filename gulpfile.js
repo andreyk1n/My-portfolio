@@ -44,6 +44,10 @@ const paths = {
   fonts: {
     src: 'src/fonts/**/*.*',  // Всі шрифти
     dest: 'dist/fonts/'       // Куди копіювати
+  },
+  data: {
+    src: 'src/data/**/*.*',   // Усі файли в папці data
+    dest: 'dist/data/'        // Куди копіювати
   }
 };
 
@@ -222,6 +226,21 @@ async function zipProject() {
     .pipe(gulp.dest(archiveDir));
 }
 
+// Копіювання data у dist
+function data() {
+  const dataPath = paths.data.src.replace('/**/*.*', '');
+  if (!fs.existsSync(dataPath)) {
+    console.warn('\x1b[33m%s\x1b[0m', `⚠️ Папка data не знайдена: ${dataPath}`);
+    return Promise.resolve(); // Продовжити без помилки
+  }
+
+  console.log('\x1b[36m%s\x1b[0m', '📊 Data файли копіюються...');
+  return gulp.src(paths.data.src)
+    .pipe(copy(paths.data.dest, { prefix: 2 }))
+    .pipe(browserSync.stream())
+    .on('end', () => console.log('📊 Data файли успішно скопійовано!'));
+}
+
 // Відслідковування змін і live-reload у браузері
 function watch() {
   browserSync.init({
@@ -243,7 +262,7 @@ function watch() {
 // Основне завдання за замовчуванням: очищення → паралельна обробка → sitemap → спостереження
 exports.default = gulp.series(
   clean,
-  gulp.parallel(html, styles, jsApp, jsFunctions, images, fonts),
+  gulp.parallel(html, styles, jsApp, jsFunctions, images, fonts, data),
   sitemap,
   watch
 );
