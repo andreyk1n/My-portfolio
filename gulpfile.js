@@ -255,6 +255,7 @@ function watch() {
   gulp.watch(paths.scripts.app, jsApp); // JS app
   gulp.watch(paths.scripts.functions, jsFunctions); // JS функції
   gulp.watch(paths.images.src, images); // Зображення
+  gulp.watch(paths.data.src, data);
 
   console.log('\x1b[44m%s\x1b[0m', '👀 Gulp слідкує за файлами...');
 }
