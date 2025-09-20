@@ -187,6 +187,7 @@
         <h2 class="projects__title">Мої проєкти</h2>
         <div class="projects__list">
         </div>
+        <a href="projects.html" class="projects__more">Дивитись всі проєкти →</a>
     </div>
 </section>
 
@@ -232,7 +233,7 @@
     function renderProjects(projects) {
       projects.sort((a, b) => parseUaDate(b.date) - parseUaDate(a.date));
 
-      const latest = projects.slice(0, 4);
+      const latest = projects.slice(0, 3);
 
       return latest.map(project => `
     <article class="project">
