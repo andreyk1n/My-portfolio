@@ -10,6 +10,7 @@
 
     &__link {
         color: #4f5bd5;
+
         &:hover {
             color: $fontColor;
         }
@@ -77,9 +78,11 @@
 
     &.hero--bigger {
         padding: 150px 0 0 0;
+
         @media (max-width: 768px) {
             padding: 100px 0 0 0;
         }
+
         .hero__container {
             flex-direction: column;
             align-items: flex-start;
@@ -87,6 +90,14 @@
             &>h1 {
                 font-size: 34px;
             }
+        }
+    }
+
+    &.hero--contacts {
+        .hero__container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
     }
 
