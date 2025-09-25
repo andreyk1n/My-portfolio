@@ -248,3 +248,30 @@ p {
 .list {
     margin-top: 15px;
 }
+
+/* Стилізація скроллбара */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a; /* Темний фон треку */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a4a4a; /* Сірий колір бегунка */
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #666666; /* Темніший колір при наведенні */
+}
+
+/* Для Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #4a4a4a #1a1a1a;
+}
