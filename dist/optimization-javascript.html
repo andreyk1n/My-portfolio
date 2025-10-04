@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Оптимізація продуктивності JavaScript: як уникнути "важких" інтерфейсів</title>
+    <meta name="description"
+        content="Дізнайтеся, як оптимізувати JavaScript, щоб інтерфейс сайту працював швидко та плавно, підвищуючи зручність для користувачів і ефективність бізнесу.">
+    <meta name="keywords"
+        content="JavaScript, оптимізація, продуктивність, code splitting, tree shaking, lazy loading, фронтенд, UX, швидкий сайт, веб-розробка">
+    <meta name="author" content="Андрій Панасюк">
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Оптимізація продуктивності JavaScript: як уникнути 'важких' інтерфейсів">
+    <meta property="og:description"
+        content="Навчіться робити сайти швидкими та плавними: lazy loading, code splitting, tree shaking і модульний код для покращення UX і бізнес-результатів.">
+    <meta property="og:image" content="./images/blog/optimization-javascript/js-performance-preview.webp">
+    <meta property="og:url" content="">
+    <meta property="og:locale" content="uk_UA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Оптимізація продуктивності JavaScript">
+    <meta name="twitter:description"
+        content="Як зробити інтерфейс сайту швидким і плавним: оптимізація JavaScript, lazy loading, code splitting і tree shaking для бізнесу.">
+    <meta name="twitter:image" content="./images/blog/optimization-javascript/js-performance-preview.webp">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicons/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="./images/favicons/android-chrome-192x192.png">
+    <link rel="mask-icon" href="./images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/main.min.css">
+</head>
+
+<body>
+
+
+
+<div class="wrapper">
+    <header class="header">
+  <div class="header__container">
+    <a href="index.html" class="header__logo">
+      Andrii Panasiuk
+    </a>
+    <nav class="header__nav">
+      <a href="projects.html" class="header__link">Мої проєкти</a>
+      <a href="blog.html" class="header__link">Блог</a>
+      <a href="contacts.html" class="header__link">Контакти</a>
+    </nav>
+    <div class="header__burger">
+      <span></span>
+    </div>
+  </div>
+</header>
+
+    <div class="single">
+        <div class="single__container">
+
+        </div>
+    </div>
+
+
+    <section class="posts">
+    <div class="posts__container">
+        <h2 class="posts__title">Нещодавні публікації</h2>
+        <div class="posts__list"></div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const posts = [
+        {
+            title: "Як UX/UI-дизайн збільшує прибуток: покращуємо користувацький досвід для зростання бізнесу",
+            link: "ux-ui-design-boosts-profit.html",
+            icon: "🎨",
+            date: "12 квітня 2024",
+            time: "5 хв",
+            category: "Дизайн",
+            description: "Дізнайтеся, як правильний дизайн підвищує конверсію та впливає на дохід компанії."
+        },
+        {
+            title: "Швидкість сайту як конкурентна перевага: оптимізація CSS та JS для бізнесу",
+            link: "site-speed-optimization-profit.html",
+            icon: "⚡",
+            date: "31 березня 2024",
+            time: "7 хв",
+            category: "Оптимізація",
+            description: "Як зменшити час завантаження сторінок та покращити користувацький досвід."
+        },
+        {
+            title: "Ефективна організація стилів: яку методологію CSS обрати для масштабованого бізнес-проєкту?",
+            link: "css-methodology-scalable-business.html",
+            icon: "📌",
+            date: "28 березня 2024",
+            time: "5 хв",
+            category: "CSS",
+            description: "Огляд популярних методологій CSS, їхні переваги та недоліки для великих проєктів."
+        },
+        {
+            title: "Темна тема в бізнесі: як зробити стильний і зручний дизайн, що підвищує залученість користувачів",
+            link: "dark-theme-business-engagement.html",
+            icon: "🌙",
+            date: "27 березня 2024",
+            time: "3 хв",
+            category: "UI/UX",
+            description: "Чому темна тема стає трендом та як її реалізувати з користю для продукту."
+        },
+        {
+            title: "Доступний сайт – більше клієнтів: як ARIA, контрасти та семантика HTML впливають на бізнес",
+            link: "accessible-site-more-clients.html",
+            icon: "🔍",
+            date: "15 квітня 2024",
+            time: "6 хв",
+            category: "Доступність",
+            description: "Як веб-доступність допомагає залучити ширшу аудиторію, покращити SEO та підвищити конверсію."
+        },
+        {
+            title: "Кастомна WordPress-тема для бізнесу: чому унікальний дизайн та функціонал дають більше переваг, ніж готові шаблони",
+            link: "custom-wordpress-theme-vs-templates.html",
+            icon: "🎯",
+            date: "20 квітня 2024",
+            time: "7 хв",
+            category: "WordPress",
+            description: "Розбираємо, коли варто інвестувати в індивідуальну тему WordPress і які бізнес-завдання це вирішує."
+        }
+    ];
+
+    // Поточна сторінка
+    const current = window.location.pathname.split("/").pop();
+
+    // Фільтруємо, щоб не брати поточну
+    const filtered = posts.filter(post => post.link !== current);
+
+    // Відсортовуємо за датою (новіші зверху)
+    const sorted = filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Беремо тільки 3 останні
+    const recommended = sorted.slice(0, 3);
+
+    // Контейнер для виводу
+    const container = document.querySelector(".posts__list");
+
+    recommended.forEach(post => {
+        const article = document.createElement("article");
+        article.classList.add("post");
+        article.innerHTML = `
+            <h3 class="post__title">
+                <span class="post__icon">${post.icon}</span>
+                <a href="${post.link}">${post.title}</a>
+            </h3>
+            <div class="post__meta">
+                <span class="post__date">${post.date}</span>
+                <span class="post__time">• ${post.time}</span>
+                <span class="post__category">• ${post.category}</span>
+            </div>
+            <p class="post__description">${post.description}</p>
+        `;
+        container.appendChild(article);
+    });
+});
+</script>
+
+
+</div>
+
+
+<footer class="footer">
+  <div class="footer__container">
+    <a href="index.html" class="header__logo">
+      © Andrii Panasiuk
+    </a>
+    <nav class="footer__nav">
+      <a href="projects.html" class="footer__link">Мої проєкти</a>
+      <a href="blog.html" class="footer__link">Блог</a>
+      <a href="contacts.html" class="footer__link">Контакти</a>
+    </nav>
+  </div>
+  </а>
+  <script src="js/functions/lazyImg.js" defer></script>
+  <script type="module" src="js/app.js"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.wrapper').classList.add('loaded');
+      }, 2500);
+    });
+  </script>
+  </body>
+
+  </html>
