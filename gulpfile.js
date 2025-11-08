@@ -288,3 +288,4 @@ exports.default = gulp.series(
 // Окремі команди
 exports.zipDist = zipDist;       // gulp zipDist — архівує dist
 exports.zipProject = zipProject; // gulp zipProject — архівує весь проєкт
+exports.publish = publish;       // gulp publish — публікує на gh-pages
