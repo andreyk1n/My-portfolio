@@ -158,43 +158,79 @@
 </section>
 
 <script>
-const container = document.getElementById('related-projects');
-fetch('/data/projects.json')
-  .then(res => res.json())
-  .then(projects => {
-    projects.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    const latestThree = projects.slice(0,3);
+let imageObserver;
 
-    latestThree.forEach(p=>{
-      const article = document.createElement('article');
-      article.classList.add('project');
-      article.innerHTML=`
-        <a target="_blank" href="${p.url}" class="project__image">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-               data-src="${p.image}" alt="${p.alt}" class="lazy">
-        </a>
-        <div class="project__content">
-          <h3 class="project__title">
-            <span class="project__icon">${p.icon}</span>
-            <a target="_blank" href="${p.url}">${p.title}</a>
-          </h3>
-          <div class="project__meta">
-            <span class="project__date">${new Date(p.date).toLocaleDateString('uk-UA',{year:'numeric',month:'short',day:'2-digit'})}</span>
-            <span class="project__category">• ${p.stack.join(', ')}</span>
-          </div>
-          <p class="project__description">${p.description}</p>
-        </div>
-      `;
-      container.appendChild(article);
+document.addEventListener("DOMContentLoaded", () => {
+  const lazyImages = document.querySelectorAll('img.lazy');
+  const lazyBackgrounds = document.querySelectorAll('.lazy-bg');
+  const placeholderImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+
+  imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        if (target.tagName === 'IMG') {
+          const realSrc = target.getAttribute('data-src');
+          if (realSrc) {
+            target.src = realSrc;
+            target.removeAttribute('data-src');
+            target.classList.remove('lazy');
+          }
+        } else if (target.classList.contains('lazy-bg')) {
+          const realBg = target.getAttribute('data-bg');
+          if (realBg) {
+            target.style.backgroundImage = `url(${realBg})`;
+            target.removeAttribute('data-bg');
+            target.classList.remove('lazy-bg');
+          }
+        }
+        observer.unobserve(target);
+      }
     });
-    if (window.imageObserver) {
-      document.querySelectorAll('#projects-list img.lazy').forEach(img=>{
-        window.imageObserver.observe(img);
+  });
+
+  lazyImages.forEach(img => {
+    if (!img.hasAttribute('src')) img.src = placeholderImage;
+    imageObserver.observe(img);
+  });
+  lazyBackgrounds.forEach(bg => imageObserver.observe(bg));
+  const container = document.getElementById('related-projects');
+  if (!container) return;
+
+  fetch('/data/projects.json')
+    .then(res => res.json())
+    .then(projects => {
+      projects.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const latestThree = projects.slice(0,3); 
+      latestThree.forEach(p => {
+        const article = document.createElement('article');
+        article.classList.add('project');
+        article.innerHTML = `
+          <a target="_blank" href="${p.url}" class="project__image">
+            <img src="${placeholderImage}"
+                 data-src="${p.image}" alt="${p.alt}" class="lazy">
+          </a>
+          <div class="project__content">
+            <h3 class="project__title">
+              <span class="project__icon">${p.icon}</span>
+              <a target="_blank" href="${p.url}">${p.title}</a>
+            </h3>
+            <div class="project__meta">
+              <span class="project__date">${new Date(p.date).toLocaleDateString('uk-UA', { year: 'numeric', month: 'short', day: '2-digit' })}</span>
+              <span class="project__category">• ${p.stack.join(', ')}</span>
+            </div>
+            <p class="project__description">${p.description}</p>
+          </div>
+        `;
+        container.appendChild(article);
+        const newImg = article.querySelector('img.lazy');
+        if (newImg && imageObserver) imageObserver.observe(newImg);
       });
-    }
-  })
-  .catch(err=>console.error('Помилка завантаження проєктів:',err));
+    })
+    .catch(err => console.error('Помилка завантаження проєктів:', err));
+});
 </script>
+
 
   <section class="experience">
     <div class="experience__container">
