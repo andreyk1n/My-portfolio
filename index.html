@@ -151,84 +151,50 @@
   <section class="projects">
     <div class="projects__container">
         <h2 class="projects__title">Мої проєкти</h2>
-        <div class="projects__list">
-
-            <article class="project">
-                <a target="_blank" href="https://andreyk1n.github.io/finsweet/" class="project__image">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                        data-src="./images/projects/finsweet.jpg" alt="Багатосторінковий сайт для digital-агенції та стартапів"
-                        class="lazy">
-                </a>
-                <div class="project__content">
-                    <h3 class="project__title">
-                        <span class="project__icon">🚀</span>
-                        <a target="_blank" href="https://andreyk1n.github.io/finsweet/">
-                            Багатосторінковий сайт для digital-агенції
-                        </a>
-                    </h3>
-                    <div class="project__meta">
-                        <span class="project__date">Лют 01, 2026</span>
-                        <span class="project__category">• React, SCSS</span>
-                    </div>
-                    <p class="project__description">
-                        Багатосторінковий сайт для digital-агенції, орієнтованої на ранні стартапи.
-                        Основний фокус — чітка структура, конверсійний дизайн і зручна навігація
-                        для презентації послуг, кейсів та залучення нових клієнтів.
-                    </p>
-                </div>
-            </article>
-
-            <article class="project">
-                <a target="_blank" href="https://andreyk1n.github.io/muncim/" class="project__image">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                        data-src="./images/projects/muncim.jpg"
-                        alt="Сайт платформи Muncim.ro для креативного рекрутингу" class="lazy">
-                </a>
-                <div class="project__content">
-                    <h3 class="project__title">
-                        <span class="project__icon">💼</span>
-                        <a target="_blank" href="https://andreyk1n.github.io/muncim/">Сайт платформи Muncim.ro для
-                            креативного рекрутингу</a>
-                    </h3>
-                    <div class="project__meta">
-                        <span class="project__date">Лис 08, 2025</span>
-                        <span class="project__category">• JavaScript, Gulp, SCSS</span>
-                    </div>
-                    <p class="project__description">
-                        Адаптивний лендінг для румунської платформи креативного рекрутингу, що перетворює вакансії на
-                        візуальні кампанії для залучення талантів через соцмережі та employer branding, на базі власного
-                        шаблону з використанням Gulp, SCSS та JavaScript.
-                    </p>
-                </div>
-            </article>
-
-            <article class="project">
-                <a target="_blank" href="https://andreyk1n.github.io/dananz/" class="project__image">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                        data-src="./images/projects/dananz-preview.png" alt="Сайт студії інтер'єрного дизайну"
-                        class="lazy">
-                </a>
-                <div class="project__content">
-                    <h3 class="project__title">
-                        <span class="project__icon">💻</span>
-                        <a target="_blank" href="https://andreyk1n.github.io/dananz/">Сайт студії інтер'єрного
-                            дизайну</a>
-                    </h3>
-                    <div class="project__meta">
-                        <span class="project__date">Вер 15, 2024</span>
-                        <span class="project__category">• JavaScript, Gulp, Html, SCSS</span>
-                    </div>
-                    <p class="project__description">
-                        Багатосторінковий адаптивний сайт, розроблений на базі власного шаблону з використанням Gulp і
-                        SCSS, JavaScript.
-                    </p>
-                </div>
-            </article>
-
+        <div class="projects__list" id="related-projects">
         </div>
         <a href="projects.html" class="projects__more">Дивитись всі проєкти →</a>
     </div>
 </section>
+
+<script>
+const container = document.getElementById('related-projects');
+fetch('/data/projects.json')
+  .then(res => res.json())
+  .then(projects => {
+    projects.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    const latestThree = projects.slice(0,3);
+
+    latestThree.forEach(p=>{
+      const article = document.createElement('article');
+      article.classList.add('project');
+      article.innerHTML=`
+        <a target="_blank" href="${p.url}" class="project__image">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+               data-src="${p.image}" alt="${p.alt}" class="lazy">
+        </a>
+        <div class="project__content">
+          <h3 class="project__title">
+            <span class="project__icon">${p.icon}</span>
+            <a target="_blank" href="${p.url}">${p.title}</a>
+          </h3>
+          <div class="project__meta">
+            <span class="project__date">${new Date(p.date).toLocaleDateString('uk-UA',{year:'numeric',month:'short',day:'2-digit'})}</span>
+            <span class="project__category">• ${p.stack.join(', ')}</span>
+          </div>
+          <p class="project__description">${p.description}</p>
+        </div>
+      `;
+      container.appendChild(article);
+    });
+    if (window.imageObserver) {
+      document.querySelectorAll('#projects-list img.lazy').forEach(img=>{
+        window.imageObserver.observe(img);
+      });
+    }
+  })
+  .catch(err=>console.error('Помилка завантаження проєктів:',err));
+</script>
 
   <section class="experience">
     <div class="experience__container">
