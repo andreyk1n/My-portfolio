@@ -1,4 +1,16 @@
 [
+    {
+    "id": "novadigital",
+    "icon": "🚀",
+    "title": "Nova Digital — Landing Page для marketing & creative agency",
+    "url": "https://andreyk1n.github.io/finsweet/",
+    "image": "./images/projects/novadigital.jpg",
+    "alt": "Багатосторінковий сайт для digital-агенції та стартапів",
+    "date": "2026-05-12",
+    "dateLabel": "Трав 12, 2026",
+    "stack": ["JavaScript", "SCSS"],
+    "description": "Проєкт реалізований з акцентом на сучасний UI, плавні анімації, адаптивність і хороший user experience. Сайт містить анімовані секції послуг, кейсів та CTA-блоків, підтримує dark/light theme через localStorage та побудований на semantic HTML5, SCSS (БЕМ) і Vanilla JavaScript з фокусом на accessibility, SEO та високий PageSpeed."
+  },
   {
     "id": "finsweet",
     "icon": "🚀",
