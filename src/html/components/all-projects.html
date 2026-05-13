@@ -1,77 +1,94 @@
 <section class="projects">
-    <div class="projects__container">
-        <div class="projects__list" id="projects-list">
-        </div>
+  <div class="projects__container">
+    <div class="projects__list" id="projects-list">
     </div>
+  </div>
 </section>
-
 <script>
-  let imageObserver;
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll('img.lazy');
-    const lazyBackgrounds = document.querySelectorAll('.lazy-bg');
-    const placeholderImage = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-    imageObserver = new IntersectionObserver((entries, observer) => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('projects-list');
+    if (!container) return;
+    const placeholderImage =
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+    const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-          if (target.tagName === 'IMG') {
-            const realSrc = target.getAttribute('data-src');
-            if (realSrc) {
-              target.src = realSrc;
-              target.removeAttribute('data-src');
-              target.classList.remove('lazy');
-            }
-          } else if (target.classList.contains('lazy-bg')) {
-            const realBg = target.getAttribute('data-bg');
-            if (realBg) {
-              target.style.backgroundImage = `url(${realBg})`;
-              target.removeAttribute('data-bg');
-              target.classList.remove('lazy-bg');
-            }
-          }
-          observer.unobserve(target);
+        if (!entry.isIntersecting) return;
+        const img = entry.target;
+        const realSrc = img.dataset.src;
+        if (realSrc) {
+          img.src = realSrc;
+          img.removeAttribute('data-src');
+          img.classList.remove('lazy');
         }
+        observer.unobserve(img);
       });
     });
-    lazyImages.forEach(img => {
-      if (!img.hasAttribute('src')) img.src = placeholderImage;
-      imageObserver.observe(img);
-    });
-    lazyBackgrounds.forEach(bg => imageObserver.observe(bg));
-  });
-  const container = document.getElementById('projects-list');
-  fetch('./data/projects.json')
-    .then(res => res.json())
-    .then(projects => {
-      projects.sort((a, b) => new Date(b.date) - new Date(a.date));
-      projects.forEach(p => {
-        const article = document.createElement('article');
-        article.classList.add('project');
-        article.innerHTML = `
-          <a target="_blank" href="${p.url}" class="project__image">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                 data-src="${p.image}" alt="${p.alt}" class="lazy">
+    fetch('./data/projects.json')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(projects => {
+        projects.sort((a, b) =>
+          new Date(b.date) - new Date(a.date)
+        );
+        projects.forEach(project => {
+          const article = document.createElement('article');
+          article.className = 'project';
+          article.innerHTML = `
+          <a target="_blank"
+             href="${project.url}"
+             class="project__image">
+            <img
+              src="${placeholderImage}"
+              data-src="${project.image}"
+              alt="${project.alt}"
+              class="lazy"
+              loading="lazy"
+            >
           </a>
           <div class="project__content">
             <h3 class="project__title">
-              <span class="project__icon">${p.icon}</span>
-              <a target="_blank" href="${p.url}">${p.title}</a>
+              <span class="project__icon">
+                ${project.icon}
+              </span>
+              <a target="_blank" href="${project.url}">
+                ${project.title}
+              </a>
             </h3>
             <div class="project__meta">
-              <span class="project__date">${new Date(p.date).toLocaleDateString('uk-UA', { year: 'numeric', month: 'short', day: '2-digit' })}</span>
-              <span class="project__category">• ${p.stack.join(', ')}</span>
+              <span class="project__date">
+                ${new Date(project.date).toLocaleDateString(
+            'uk-UA',
+            {
+              year: 'numeric',
+              month: 'short',
+              day: '2-digit'
+            }
+          )}
+              </span>
+              <span class="project__category">
+                • ${project.stack.join(', ')}
+              </span>
             </div>
-            <p class="project__description">${p.description}</p>
+            <p class="project__description">
+              ${project.description}
+            </p>
           </div>
         `;
-        container.appendChild(article);
-      });
-      if (typeof imageObserver !== 'undefined') {
-        document.querySelectorAll('#projects-list img.lazy').forEach(img => {
-          imageObserver.observe(img);
+          container.appendChild(article);
         });
-      }
-    })
-    .catch(err => console.error('Помилка завантаження проєктів:', err));
+        document
+          .querySelectorAll('#projects-list img.lazy')
+          .forEach(img => imageObserver.observe(img));
+      })
+      .catch(err => {
+        console.error(
+          'Помилка завантаження проєктів:',
+          err
+        );
+      });
+  });
 </script>
