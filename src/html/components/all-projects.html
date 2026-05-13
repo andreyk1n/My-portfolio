@@ -41,7 +41,7 @@
     lazyBackgrounds.forEach(bg => imageObserver.observe(bg));
   });
   const container = document.getElementById('projects-list');
-  fetch('/data/projects.json')
+  fetch('./data/projects.json')
     .then(res => res.json())
     .then(projects => {
       projects.sort((a, b) => new Date(b.date) - new Date(a.date));
